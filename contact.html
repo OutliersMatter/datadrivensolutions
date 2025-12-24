@@ -61,7 +61,7 @@
           <small style="margin-bottom: 1rem; display: block;">Select all that apply</small>
           <div class="radio-group">
             <div class="radio-option">
-              <input type="checkbox" id="data-analysis" name="service[]" value="Data Analysis" required>
+              <input type="checkbox" id="data-analysis" name="service[]" value="Data Analysis">
               <label for="data-analysis">📊 Data Analysis</label>
             </div>
             <div class="radio-option">
@@ -118,9 +118,9 @@
       </div>
       <div class="footer-links">
         <h4>Quick Links</h4>
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#expertise">About Us</a>
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#expertise">About Dallas</a>
         <a href="contact.html">Contact Us</a>
       </div>
     </div>
@@ -140,17 +140,22 @@
       }
     });
 
-    // Form submission
+    // Form submission with service validation
     const form = document.getElementById('contactForm');
     const successMessage = document.getElementById('successMessage');
 
     form.addEventListener('submit', function(e) {
-      // Formspree will handle the actual submission
-      // Uncomment below to show success message after submission
-      // e.preventDefault();
-      // successMessage.classList.add('show');
-      // form.reset();
-      // window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Check if at least one service is selected
+      const checkboxes = document.querySelectorAll('input[name="service[]"]');
+      const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+      
+      if (!isChecked) {
+        e.preventDefault();
+        alert('Please select at least one service you are interested in.');
+        return false;
+      }
+      
+      // If validation passes, Formspree will handle the actual submission
     });
   </script>
 </body>
